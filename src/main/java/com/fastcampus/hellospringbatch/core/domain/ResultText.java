@@ -18,8 +18,8 @@ import lombok.NoArgsConstructor;
 @DynamicUpdate // 일부 컬럼의 값이 변경 되었을 때, 그 컬럼에 대해서만 쿼리를 할 수 있게 해줌
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "plain_text")
-public class PlainText {
+@Table(name = "result_text")
+public class ResultText {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

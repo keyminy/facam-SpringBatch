@@ -23,7 +23,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Sort;
 
 import com.fastcampus.hellospringbatch.core.domain.PlainText;
+import com.fastcampus.hellospringbatch.core.domain.ResultText;
 import com.fastcampus.hellospringbatch.core.repository.PlainTextRepository;
+import com.fastcampus.hellospringbatch.core.repository.ResultTextRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -34,6 +36,7 @@ public class PlainTextJobConfig {
 	private final JobBuilderFactory jobBuilderFactory;
 	private final StepBuilderFactory stepBuilderFactory;
 	private final PlainTextRepository plainTextRepository;
+	private final ResultTextRepository resultTextRepository;
 	
 	@Bean("plainTextJob")
 	public Job plainTextJob(Step plainTextStep) {
@@ -96,7 +99,10 @@ public class PlainTextJobConfig {
 //			}
 //		};
 		return items -> {
-			items.forEach(System.out::println);
+//			items.forEach(System.out::println);
+			
+			/*result_text에 저장하는 것으로 변경*/
+			items.forEach(item -> resultTextRepository.save(new ResultText(null,item)));
 			//하나의 chunk가 끝남
 			System.out.println("========= chunk is finished");
 		};
